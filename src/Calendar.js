@@ -706,7 +706,7 @@ function Calendar_constructor(element, overrides) {
 	-----------------------------------------------------------------------------*/
 	// TODO: going forward, most of this stuff should be directly handled by the view
 
-	var renderEventsDebounced = debounce(renderEvents, options.renderDelay);
+	var renderEventsDebounced = options.renderDelay ? debounce(renderEvents, options.renderDelay) : renderEvents;
 
 	function refetchEvents() { // can be called as an API method
 		destroyEvents(); // so that events are cleared before user starts waiting for AJAX
