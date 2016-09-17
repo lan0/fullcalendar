@@ -9518,7 +9518,7 @@ function Calendar_constructor(element, overrides) {
 	};
 
 
-	
+
 	// Imports
 	// -----------------------------------------------------------------------------------
 
@@ -9545,9 +9545,9 @@ function Calendar_constructor(element, overrides) {
 	var ignoreWindowResize = 0;
 	var events = [];
 	var date; // unzoned
-	
-	
-	
+
+
+
 	// Main Rendering
 	// -----------------------------------------------------------------------------------
 
@@ -9559,8 +9559,8 @@ function Calendar_constructor(element, overrides) {
 	else {
 		date = t.getNow(); // getNow already returns unzoned
 	}
-	
-	
+
+
 	function render() {
 		if (!content) {
 			initialRender();
@@ -9571,8 +9571,8 @@ function Calendar_constructor(element, overrides) {
 			renderView();
 		}
 	}
-	
-	
+
+
 	function initialRender() {
 		element.addClass('fc');
 
@@ -9632,8 +9632,8 @@ function Calendar_constructor(element, overrides) {
 			element.prepend(header.el);
 		}
 	}
-	
-	
+
+
 	function destroy() {
 
 		if (currentView) {
@@ -9653,13 +9653,13 @@ function Calendar_constructor(element, overrides) {
 			$(window).unbind('resize', windowResizeProxy);
 		}
 	}
-	
-	
+
+
 	function elementVisible() {
 		return element.is(':visible');
 	}
-	
-	
+
+
 
 	// View Rendering
 	// -----------------------------------------------------------------------------------
@@ -9746,7 +9746,7 @@ function Calendar_constructor(element, overrides) {
 		ignoreWindowResize--;
 	}
 
-	
+
 
 	// Resizing
 	// -----------------------------------------------------------------------------------
@@ -9763,8 +9763,8 @@ function Calendar_constructor(element, overrides) {
 	t.isHeightAuto = function() {
 		return t.options.contentHeight === 'auto' || t.options.height === 'auto';
 	};
-	
-	
+
+
 	function updateSize(shouldRecalc) {
 		if (elementVisible()) {
 
@@ -9786,8 +9786,8 @@ function Calendar_constructor(element, overrides) {
 			_calcSize();
 		}
 	}
-	
-	
+
+
 	function _calcSize() { // assumes elementVisible
 		var contentHeightInput = t.options.contentHeight;
 		var heightInput = t.options.height;
@@ -9816,8 +9816,8 @@ function Calendar_constructor(element, overrides) {
 	function queryHeaderHeight() {
 		return header.el ? header.el.outerHeight(true) : 0; // includes margin
 	}
-	
-	
+
+
 	function windowResize(ev) {
 		if (
 			!ignoreWindowResize &&
@@ -9829,14 +9829,14 @@ function Calendar_constructor(element, overrides) {
 			}
 		}
 	}
-	
-	
-	
+
+
+
 	/* Event Fetching/Rendering
 	-----------------------------------------------------------------------------*/
 	// TODO: going forward, most of this stuff should be directly handled by the view
 
-	var renderEventsDebounced = options.renderDelay ? debounce(renderEvents, options.renderDelay) : renderEvents;
+	var renderEventsDebounced = t.options.renderDelay ? debounce(renderEvents, t.options.renderDelay) : renderEvents;
 
 	function refetchEvents() { // can be called as an API method
 		fetchAndRenderEvents();
@@ -9856,7 +9856,7 @@ function Calendar_constructor(element, overrides) {
 			unfreezeContentHeight();
 		}
 	}
-	
+
 
 	function getAndRenderEvents() {
 		if (!t.options.lazyFetching || isFetchNeeded(currentView.start, currentView.end)) {
@@ -9874,7 +9874,7 @@ function Calendar_constructor(element, overrides) {
 			// ... which will call renderEvents
 	}
 
-	
+
 	// called when event data arrives
 	function reportEvents(_events) {
 		events = _events;
@@ -9908,12 +9908,12 @@ function Calendar_constructor(element, overrides) {
 			header.enableButton('today');
 		}
 	}
-	
+
 
 
 	/* Selection
 	-----------------------------------------------------------------------------*/
-	
+
 
 	// this public method receives start/end dates in any format, with any timezone
 	function select(zonedStartInput, zonedEndInput) {
@@ -9921,56 +9921,56 @@ function Calendar_constructor(element, overrides) {
 			t.buildSelectSpan.apply(t, arguments)
 		);
 	}
-	
+
 
 	function unselect() { // safe to be called before renderView
 		if (currentView) {
 			currentView.unselect();
 		}
 	}
-	
-	
-	
+
+
+
 	/* Date
 	-----------------------------------------------------------------------------*/
-	
-	
+
+
 	function prev() {
 		date = currentView.computePrevDate(date);
 		renderView();
 	}
-	
-	
+
+
 	function next() {
 		date = currentView.computeNextDate(date);
 		renderView();
 	}
-	
-	
+
+
 	function prevYear() {
 		date.add(-1, 'years');
 		renderView();
 	}
-	
-	
+
+
 	function nextYear() {
 		date.add(1, 'years');
 		renderView();
 	}
-	
-	
+
+
 	function today() {
 		date = t.getNow();
 		renderView();
 	}
-	
-	
+
+
 	function gotoDate(zonedDateInput) {
 		date = t.moment(zonedDateInput).stripZone();
 		renderView();
 	}
-	
-	
+
+
 	function incrementDate(delta) {
 		date.add(moment.duration(delta));
 		renderView();
@@ -9988,8 +9988,8 @@ function Calendar_constructor(element, overrides) {
 		date = newDate.clone();
 		renderView(spec ? spec.type : null);
 	}
-	
-	
+
+
 	// for external API
 	function getDate() {
 		return t.applyTimezone(date); // infuse the calendar's timezone
@@ -10021,23 +10021,23 @@ function Calendar_constructor(element, overrides) {
 			overflow: ''
 		});
 	}
-	
-	
-	
+
+
+
 	/* Misc
 	-----------------------------------------------------------------------------*/
-	
+
 
 	function getCalendar() {
 		return t;
 	}
 
-	
+
 	function getView() {
 		return currentView;
 	}
-	
-	
+
+
 	function option(name, value) {
 		var newOptionHash;
 
@@ -10103,8 +10103,8 @@ function Calendar_constructor(element, overrides) {
 		viewsByType = {}; // even non-current views will be affected by this option change. do before rerender
 		reinitView();
 	}
-	
-	
+
+
 	function trigger(name, thisObj) { // overrides the Emitter's trigger method :(
 		var args = Array.prototype.slice.call(arguments, 2);
 
