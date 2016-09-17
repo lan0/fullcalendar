@@ -801,7 +801,7 @@ function Calendar_constructor(element, overrides) {
 	-----------------------------------------------------------------------------*/
 	// TODO: going forward, most of this stuff should be directly handled by the view
 
-	var renderEventsDebounced = options.renderDelay ? debounce(renderEvents, options.renderDelay) : renderEvents;
+	var renderEventsDebounced = t.options.renderDelay ? debounce(renderEvents, t.options.renderDelay) : renderEvents;
 
 	function refetchEvents() { // can be called as an API method
 		fetchAndRenderEvents();
