@@ -801,6 +801,7 @@ function Calendar_constructor(element, overrides) {
 	-----------------------------------------------------------------------------*/
 	// TODO: going forward, most of this stuff should be directly handled by the view
 
+	var renderEventsDebounced = t.options.renderDelay ? debounce(renderEvents, t.options.renderDelay) : renderEvents;
 
 	function refetchEvents() { // can be called as an API method
 		fetchAndRenderEvents();
@@ -827,7 +828,7 @@ function Calendar_constructor(element, overrides) {
 			fetchAndRenderEvents();
 		}
 		else {
-			renderEvents();
+			renderEventsDebounced();
 		}
 	}
 
@@ -842,13 +843,13 @@ function Calendar_constructor(element, overrides) {
 	// called when event data arrives
 	function reportEvents(_events) {
 		events = _events;
-		renderEvents();
+		renderEventsDebounced();
 	}
 
 
 	// called when a single event's data has been changed
 	function reportEventChange() {
-		renderEvents();
+		renderEventsDebounced();
 	}
 
 
