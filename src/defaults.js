@@ -91,8 +91,9 @@ Calendar.defaults = {
 	handleWindowResize: true,
 	windowResizeDelay: 100, // milliseconds before an updateSize happens
 
-	longPressDelay: 1000
+	longPressDelay: 1000,
 	
+	renderDelay: 0 // calendar render debounce timeout
 };
 
 
