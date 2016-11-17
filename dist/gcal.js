@@ -1,5 +1,5 @@
 /*!
- * FullCalendar v3.0.0-debounced Google Calendar Plugin
+ * FullCalendar v3.0.1-debounced Google Calendar Plugin
  * Docs & License: http://fullcalendar.io/
  * (c) 2016 Adam Shaw
  */
